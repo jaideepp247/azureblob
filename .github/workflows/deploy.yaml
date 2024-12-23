@@ -18,6 +18,6 @@ jobs:
       with:
         account_name: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
         account_key: ${{ secrets.AZURE_STORAGE_ACCESS_KEY }}
-        container_name: 'web'  # The blob container name where your files will be uploaded
+        container_name: '$web'  # The blob container name where your files will be uploaded
         source_dir: './'  # The root directory of your repository (or specify your build output directory)
         overwrite: true  # Overwrite existing files in the container
