@@ -16,8 +16,7 @@ jobs:
     - name: Azure Blob Storage Upload
       uses: bacongobbler/azure-blob-storage-upload@v3.0.0
       with:
-        account_name: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
-        account_key: ${{ secrets.AZURE_STORAGE_ACCESS_KEY }}
-        container_name: '$web'  # The blob container name where your files will be uploaded
-        source_dir: './'  # The root directory of your repository (or specify your build output directory)
-        overwrite: true  # Overwrite existing files in the container
+        connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+        container_name: '$web'  # The blob container name
+        source_dir: './'  # Directory of files to upload
+        overwrite: true  # Overwrite existing files
