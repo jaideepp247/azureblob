@@ -3,7 +3,7 @@ name: Deploy to Azure Blob Storage
 on:
   push:
     branches:
-      - main  # Replace with the branch you want to trigger deployment
+      - main
 
 jobs:
   deploy:
@@ -13,9 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Upload files to Azure Blob Storage
-      uses: Azure/azure-storage-blob-upload@v1
+    - name: Upload to Azure Blob Storage
+      uses: azure/azure-storage-blob-upload@v1
       with:
-        connection-string: DefaultEndpointsProtocol=https;AccountName=${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }};AccountKey=${{ secrets.AZURE_STORAGE_ACCESS_KEY }};EndpointSuffix=core.windows.net
-        container-name: '$web'
-        source-folder: './' # Path to your static files
+        source_dir: './'
+        container_name: 'web'
+        account_name: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
+        account_key: ${{ secrets.AZURE_STORAGE_ACCESS_KEY }}
