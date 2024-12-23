@@ -1,4 +1,4 @@
-name: Deploy to Azure Blob Storage
+name: Deploy Static Website to Azure Blob Storage
 
 on:
   push:
@@ -10,13 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v3
 
-    - name: Upload to Azure Blob Storage
-      uses: azure/azure-storage-blob-upload@v1
+    - name: Azure Blob Storage Upload
+      uses: bacongobbler/azure-blob-storage-upload@v3.0.0
       with:
-        source_dir: './'
-        container_name: 'web'
         account_name: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
         account_key: ${{ secrets.AZURE_STORAGE_ACCESS_KEY }}
+        container_name: 'web'  # The blob container name where your files will be uploaded
+        source_dir: './'  # The root directory of your repository (or specify your build output directory)
+        overwrite: true  # Overwrite existing files in the container
