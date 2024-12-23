@@ -1,0 +1,21 @@
+name: Deploy to Azure Blob Storage
+
+on:
+  push:
+    branches:
+      - main  # Replace with the branch you want to trigger deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Upload files to Azure Blob Storage
+      uses: Azure/azure-storage-blob-upload@v1
+      with:
+        connection-string: DefaultEndpointsProtocol=https;AccountName=${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }};AccountKey=${{ secrets.AZURE_STORAGE_ACCESS_KEY }};EndpointSuffix=core.windows.net
+        container-name: '$web'
+        source-folder: './' # Path to your static files
